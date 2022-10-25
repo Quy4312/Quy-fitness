@@ -40,6 +40,10 @@
     top: 15%;
     perspective: 1000;
 }
+.chart-servings-container::-webkit-scrollbar {
+    width: 0 !important;
+    display: none;
+}
 .swap.chart-servings{
     transform:rotateY(180deg);
 }
@@ -51,6 +55,10 @@
     transition: 0.6s;
 	transform-style: preserve-3d;
     
+}
+.chart-servings::-webkit-scrollbar {
+    width: 0 !important;
+    display: none;
 }
 
 .chart{
