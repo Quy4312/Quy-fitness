@@ -1,71 +1,98 @@
-.fooditem-ctn{
-    width: 80%;
-    height: 112px;
-    background-color: rgba(131 131 131 / 70%);
-    border-radius: 15px;
-    position: relative;
-    margin-bottom: 10px;
+.food-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
 }
-.food-img{
-    width: 138px;
-    border-radius: 10px;
-    position: absolute;
-    top: 11px;
-    left: 12px;
+.fooditem-ctn {
+  padding: 10px 10px 15px;
+  /* background-color: rgba(131 131 131 / 70%); */
+  border-radius: 15px;
+  position: relative;
+  background: rgba(245, 166, 35, 0.55);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8px);
+  /* -webkit-backdrop-filter: blur(8px); */
+  /* border-radius: 10px; */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
 
+.fooditem-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  margin: 10px 0;
 }
-.fooditem-text{
-    position: absolute;
-    top: 11px;
-    left: 175px;
-    font-size: 23px;
-    font-weight: bold;
 
+.fooditem-col {
+  width: 45%;
 }
-.fooditem-protein{
-    position: absolute;
-    top: 11px;
-    left: 381px;
-    font-size: 21px;
-    font-weight: bold;
-    font-family: serif;
-}
-.fooditem-carb{
- position: absolute;
-    top: 40px;
-    left: 381px;
-    font-size: 21px;
-    font-weight: bold;
-    font-family: serif;
-}
-.fooditem-fat{
-    position: absolute;
-    top: 70px;
-    left: 381px;
-    font-size: 21px;
-    font-weight: bold; 
-    font-family: serif;
-}
-.fooditem-calo{
-    position: absolute;
-    top: 47px;
-    left: 217px;
-    font-size: 21px;
-    font-weight: bold; 
-    font-family: serif;
-}
-.fooditem-input{
-    position: absolute;
-    top: 47px;
-    left: 542px;
-    width: 100px;
-}
-.fooditem-button{
-    position: absolute;
-    top: 47px;
-    left: 650px;
-    width: 32px;
-    border: 1px solid;
-    border-radius: 6px;
 
+.fooditem-ic::before {
+  font-size: 20px;
+}
+
+.food-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.food-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.fooditem-text {
+  font-size: 23px;
+  font-weight: bolder;
+}
+.fooditem-protein {
+  font-size: 16px;
+}
+.fooditem-carb {
+  font-size: 16px;
+}
+.fooditem-fat {
+  font-size: 16px;
+}
+.fooditem-calo {
+  text-align: center;
+  font-size: 16px;
+}
+.fooditem-input {
+  box-shadow: none;
+  outline: none;
+  width: calc(100% - 67px);
+  border-radius: 6px 0 0 6px;
+  border: 3px solid rgba(37, 212, 55, 0.6);
+  border-right: none;
+}
+
+.fooditem-input:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.fooditem-button {
+  width: 68px;
+  height: 38px;
+  border: 2px solid rgba(37, 212, 55, 0.6);
+  border-radius: 0 6px 6px 0;
+  border-left: none;
+  background: rgba(37, 212, 55, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  /* border-radius: 10px; */
+  /* border: 1px solid rgba(255, 255, 255, 0.18); */
+}
+.fooditem-button:hover {
+  opacity: 0.8;
+}
+.fooditem-row-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
 }

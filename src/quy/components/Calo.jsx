@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./Calo.css";
 import { useState } from "react";
 import { Fooditem } from "./Fooditem";
@@ -7,11 +7,14 @@ import { Doughnut } from "react-chartjs-2";
 import { useContext } from "react";
 import { TdeeContext } from "../context/Context";
 import { v4 as uuidv4 } from "uuid";
+import autoAnimate from "@formkit/auto-animate";
+
 ChartJs.register(Tooltip, Title, ArcElement, Legend);
 
 export const Calo = () => {
   const tdee = useContext(TdeeContext);
-  const menu = [
+
+  const [menu, setMenu] = useState([
     {
       path: "ucgasong.jpg",
       text: "Ức Gà ( Sống )",
@@ -357,42 +360,21 @@ export const Calo = () => {
       calo: "43",
       id: uuidv4(),
     },
-  ];
-  // const [calocurrent, setCalocurrent] = useState(0);
-  // const [proteintotal, setProteintotal] = useState(0);
-  // const [carbtotal, setCarbtotal] = useState(0);
-  // const [fattotal, setFattotal] = useState(0);
-  // const [proteinpercent, setProteinpercent] = useState(60);
-  // const [carbpercent, setCarbpercent] = useState(30);
-  // const [fatpercent, setFatpercent] = useState(10);
-  // const [datachart, setDatachart] = useState({
-  //   datasets: [
-  //     {
-  //       data: [proteinpercent, carbpercent, fatpercent],
-  //       backgroundColor: ["#ff0000b5", "#d1ff00b5", "#00fffab5"],
-  //       borderColor: "transparent",
-  //       options: {
-  //         scales: {
-  //           pointLabels: { fontSize: 30 },
-  //         },
-  //       },
-  //     },
-  //   ],
-
-  //   // These labels appear in the legend and in the tooltips when hovering different arcs
-  //   labels: ["Protein", "Tinh Bột", "Chất Béo"],
-  // });
+  ]);
   const [searchfood, setSearchfood] = useState("");
   const [swap, setSwap] = useState(false);
   // const [servings, setServings] = useState([]);
+
+  const foodListRef = useRef(null);
+  const servingsListRef = useRef(null);
+
   const handleSwapChange = () => {
     setSwap(!swap);
-    // console.log("swap");
   };
   const handleSearchfoodChange = (e) => {
     setSearchfood(e.target.value);
   };
-  console.log(tdee.servings);
+
   const saveServings = () => {
     const setjson = JSON.stringify(tdee.servings);
     localStorage.setItem(`${tdee.accountname}list`, setjson);
@@ -436,54 +418,71 @@ export const Calo = () => {
     // console.log(newList);
   };
 
+  useEffect(() => {
+    foodListRef.current && autoAnimate(foodListRef.current);
+  }, [foodListRef]);
+  useEffect(() => {
+    servingsListRef.current && autoAnimate(servingsListRef.current);
+  }, [servingsListRef]);
+
   return (
     <div className="calo-ctn">
       <div className="calo-menu">
-        <div className="calo-menu-title">BẢNG TÍNH CALO THEO 100G</div>
+        <div className="calo-menu-title">BẢNG THÀNH PHẦN DINH DƯỠNG </div>
 
-        <div style={{ marginBottom: "20px" }}>
+        <div className="calo-menu--searchfood--ctn">
+          <i class="fa-solid fa-magnifying-glass"></i>
           <input
+            className="calo-menu--searchfood"
             type="text"
             placeholder="Enter food's name here"
             value={searchfood}
             onChange={handleSearchfoodChange}
           />
         </div>
-        {menu
-          .filter((item) => {
-            return (
-              item.text
-                .toLowerCase()
-                .indexOf(searchfood.trim().toLowerCase()) !== -1
-            );
-          })
-          .map((item) => (
-            <Fooditem
-              key={item.path + item.text}
-              path={item.path}
-              text={item.text}
-              protein={item.protein}
-              carb={item.carb}
-              fat={item.fat}
-              calo={item.calo}
-              calocurrent={tdee.calocurrent}
-              setCalocurrent={tdee.setCalocurrent}
-              proteintotal={tdee.proteintotal}
-              carbtotal={tdee.carbtotal}
-              fattotal={tdee.fattotal}
-              setProteintotal={tdee.setProteintotal}
-              setCarbtotal={tdee.setCarbtotal}
-              setFattotal={tdee.setFattotal}
-              carbpercent={tdee.carbpercent}
-              setCarbpercent={tdee.setCarbpercent}
-              fatpercent={tdee.fatpercent}
-              setFatpercent={tdee.setFatpercent}
-              proteinpercent={tdee.proteinpercent}
-              setProteinpercent={tdee.setProteinpercent}
-              setDatachart={tdee.setDatachart}
-              servings={tdee.servings}
-            />
-          ))}
+        {!menu?.filter((item) => {
+          return (
+            item.text.toLowerCase().indexOf(searchfood.trim().toLowerCase()) !==
+            -1
+          );
+        }).length && <p>Nothing found</p>}
+        <div className="food-list" ref={foodListRef}>
+          {menu
+            ?.filter((item) => {
+              return (
+                item.text
+                  .toLowerCase()
+                  .indexOf(searchfood.trim().toLowerCase()) !== -1
+              );
+            })
+            .map((item) => (
+              <Fooditem
+                key={item.path + item.text}
+                path={item.path}
+                text={item.text}
+                protein={item.protein}
+                carb={item.carb}
+                fat={item.fat}
+                calo={item.calo}
+                calocurrent={tdee.calocurrent}
+                setCalocurrent={tdee.setCalocurrent}
+                proteintotal={tdee.proteintotal}
+                carbtotal={tdee.carbtotal}
+                fattotal={tdee.fattotal}
+                setProteintotal={tdee.setProteintotal}
+                setCarbtotal={tdee.setCarbtotal}
+                setFattotal={tdee.setFattotal}
+                carbpercent={tdee.carbpercent}
+                setCarbpercent={tdee.setCarbpercent}
+                fatpercent={tdee.fatpercent}
+                setFatpercent={tdee.setFatpercent}
+                proteinpercent={tdee.proteinpercent}
+                setProteinpercent={tdee.setProteinpercent}
+                setDatachart={tdee.setDatachart}
+                servings={tdee.servings}
+              />
+            ))}
+        </div>
       </div>
       <div className="chart-servings-container">
         <div className="swap-btn" onClick={handleSwapChange}>
@@ -498,44 +497,52 @@ export const Calo = () => {
           </div>
           <div className="servings">
             <div className="servings-title">Thực Đơn</div>
-            <div>
-              {tdee.servings.length !== 0 &&
-                tdee.servings.map((item) => (
-                  <div className="fooditem-ctn" key={item.id}>
-                    <div>
-                      <img
-                        className="food-img"
-                        src={require(`../img/${item.path}`)}
-                        alt=""
-                      />
-                    </div>
-
-                    <div className="fooditem-calo">
-                      Khối Lượng: {item.inputfooditem} g
-                    </div>
-
-                    <div className="fooditem-text">{item.text}</div>
-                    <button
-                      className="fooditem-button"
-                      style={{ marginLeft: "-80px" }}
-                      onClick={() => {
-                        removeFood(
-                          item.id,
-                          item.calo,
-                          item.protein,
-                          item.carb,
-                          item.fat,
-                          item.inputfooditem
-                        );
-                      }}
-                    >
-                      -
-                    </button>
-                  </div>
-                ))}
-            </div>
             <div className="save-btn" onClick={saveServings}>
               Lưu
+            </div>
+            <div>
+              <div className="food-list" ref={servingsListRef}>
+                {!tdee.servings?.length && (
+                  <div className="nodata-noti">Chưa có món...</div>
+                )}
+                {tdee.servings.length !== 0 &&
+                  tdee.servings.map((item) => (
+                    <div className="fooditem-ctn" key={item.id}>
+                      <div>
+                        <img
+                          className="food-img"
+                          src={require(`../img/${item.path}`)}
+                          alt=""
+                        />
+                      </div>
+                      <div className="fooditem-text">{item.text}</div>
+
+                      <div
+                        className="fooditem-calo"
+                        style={{ marginLeft: "-172px", marginTop: "12px" }}
+                      >
+                        Khối Lượng: {item.inputfooditem} g
+                      </div>
+
+                      <button
+                        className="fooditem-button-servings"
+                        onClick={() => {
+                          removeFood(
+                            item.id,
+                            item.calo,
+                            item.protein,
+                            item.carb,
+                            item.fat,
+                            item.inputfooditem
+                          );
+                        }}
+                      >
+                        <i class="fa-regular fa-trash-can trash-ic"></i>
+                        Xóa món
+                      </button>
+                    </div>
+                  ))}
+              </div>
             </div>
           </div>
         </div>

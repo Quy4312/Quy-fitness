@@ -79,36 +79,47 @@ export const Fooditem = ({
   // parseFloat(tdee.bmi.toFixed(1))
   return (
     <div className="fooditem-ctn">
-      <div>
-        <img className="food-img" src={require(`../img/${path}`)} alt="" />
-      </div>
-      <div className="fooditem-calo">
-        Calo: {((inputfooditem / 100) * calo).toFixed(1)} calo
+      <div className="food-img">
+        <img src={require(`../img/${path}`)} alt="" />
       </div>
       <div className="fooditem-text">{text}</div>
-      <div className="fooditem-protein">
-        Protein: {((inputfooditem / 100) * protein).toFixed(1)}g
+      <div className="fooditem-row">
+        <div className="fooditem-col">
+          <div className="fooditem-protein">
+            Protein: {((inputfooditem / 100) * protein).toFixed(1)}g
+          </div>
+          <div className="fooditem-carb">
+            Tinh bột: {((inputfooditem / 100) * carb).toFixed(1)}g
+          </div>
+          <div className="fooditem-fat">
+            Chất béo: {((inputfooditem / 100) * fat).toFixed(1)}g
+          </div>
+        </div>
+
+        <i class="fa-solid fa-right-left fooditem-ic"></i>
+        <div className="fooditem-col">
+          <div className="fooditem-calo">
+            {((inputfooditem / 100) * calo).toFixed(1)} calo
+          </div>
+        </div>
       </div>
-      <div className="fooditem-carb">
-        Tinh bột: {((inputfooditem / 100) * carb).toFixed(1)}g
+
+      <div className="fooditem-row-footer">
+        <input
+          className="fooditem-input"
+          type="number"
+          onChange={handleInputfooditem}
+          value={inputfooditem}
+        />
+        <button
+          className="fooditem-button"
+          onClick={() => {
+            setcalo(path, text, protein, carb, fat, calo);
+          }}
+        >
+          +
+        </button>
       </div>
-      <div className="fooditem-fat">
-        Chất béo: {((inputfooditem / 100) * fat).toFixed(1)}g
-      </div>
-      <input
-        className="fooditem-input"
-        type="number"
-        onChange={handleInputfooditem}
-        value={inputfooditem}
-      />
-      <button
-        className="fooditem-button"
-        onClick={() => {
-          setcalo(path, text, protein, carb, fat, calo);
-        }}
-      >
-        +
-      </button>
     </div>
   );
 };
