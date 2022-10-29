@@ -14,7 +14,7 @@ export const Account = () => {
     tdee.setSignindisplay("block");
     localStorage.setItem("logged", false);
   };
-  console.log(tdee.logged);
+  // console.log(tdee.logged);
 
   // console.log(tdee.logged);
   return (
@@ -33,6 +33,7 @@ export const Account = () => {
               onClick={() => {
                 navigate("/oldservings");
                 tdee.setColoricon("black");
+                tdee.setBlurred(true);
               }}
             >
               Thực Đơn Đã Lưu

@@ -39,6 +39,7 @@ function TdeeProvider({ children }) {
   const [proteinpercent, setProteinpercent] = useState(60);
   const [carbpercent, setCarbpercent] = useState(30);
   const [fatpercent, setFatpercent] = useState(10);
+  const [blurred, setBlurred] = useState(false);
   const [datachart, setDatachart] = useState({
     datasets: [
       {
@@ -214,6 +215,8 @@ function TdeeProvider({ children }) {
     fatpercent,
     setDatachart,
     datachart,
+    blurred,
+    setBlurred,
   };
   return <TdeeContext.Provider value={value}>{children}</TdeeContext.Provider>;
 }

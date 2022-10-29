@@ -61,38 +61,51 @@ export const Tdee = () => {
   return (
     <div className="tdee-ctn">
       <div className="tdee-cal">
-        <div>
-          <label htmlFor="gender" style={{ marginRight: "10px" }}>
-            Giới Tính:{" "}
-          </label>
-          <select id="gender" onChange={handleGenderChange}>
-            <option value="M">Nam</option>
-            <option value="F">Nữ</option>
-          </select>
+        <div className="fooditem-row-tdee">
+          <div className="fooditem-col-tdee">
+            <div>
+              <div style={{ marginLeft: "-17px" }}>
+                <label htmlFor="gender" style={{ marginRight: "10px" }}>
+                  Giới Tính{" "}
+                </label>
+              </div>
+              <select id="gender" onChange={handleGenderChange}>
+                <option value="M">Nam</option>
+                <option value="F">Nữ</option>
+              </select>
+            </div>
+          </div>
+          <div className="fooditem-col-tdee">
+            <div>
+              <div style={{ marginLeft: "-17px" }}>
+                <label htmlFor="age" style={{ marginRight: "10px" }}>
+                  Tuổi{" "}
+                </label>
+              </div>
+              <input
+                className="tdee-cal-input"
+                type="number"
+                id="age"
+                placeholder="Nhập tuổi của bạn..."
+                min="0"
+                max="999"
+                onChange={handleAgeChange}
+                required
+              />
+            </div>
+          </div>
         </div>
 
+        {/* <br /> */}
         <br />
         <div>
-          <label htmlFor="age" style={{ marginRight: "10px" }}>
-            Tuổi:{" "}
-          </label>
+          <div style={{ marginLeft: "21px" }}>
+            <label htmlFor="weight" style={{ marginRight: "10px" }}>
+              Cân Nặng(kg){" "}
+            </label>
+          </div>
           <input
-            className="tdee-cal-input"
-            type="number"
-            id="age"
-            min="0"
-            max="999"
-            onChange={handleAgeChange}
-            required
-          />
-        </div>
-        <br />
-        <div>
-          <label htmlFor="weight" style={{ marginRight: "10px" }}>
-            Cân Nặng(kg):{" "}
-          </label>
-          <input
-            className="tdee-cal-input"
+            className="tdee-cal-input-secord"
             type="number"
             id="weight"
             min="0"
@@ -104,11 +117,13 @@ export const Tdee = () => {
 
         <br />
         <div>
-          <label htmlFor="height" style={{ marginRight: "10px" }}>
-            Chiều Cao(cm):{" "}
-          </label>
+          <div style={{ marginLeft: "21px" }}>
+            <label htmlFor="height" style={{ marginRight: "10px" }}>
+              Chiều Cao(cm){" "}
+            </label>
+          </div>
           <input
-            className="tdee-cal-input"
+            className="tdee-cal-input-secord"
             type="number"
             id="height"
             min="0"
@@ -120,8 +135,14 @@ export const Tdee = () => {
 
         <br />
         <div>
-          <label htmlFor="activityLevel">Mức độ hoạt động: </label>
-          <select id="activityLevel" onChange={handleActivityLevelChange}>
+          <div style={{ marginLeft: "21px" }}>
+            <label htmlFor="activityLevel">Mức độ hoạt động </label>
+          </div>
+          <select
+            id="activityLevel"
+            className="tdee-cal-input-secord"
+            onChange={handleActivityLevelChange}
+          >
             <option value="1.2">Ít vận động (Công việc văn phòng)</option>
             <option value="1.375">Tập thể dục nhẹ (1-2 ngày / tuần)</option>
             <option value="1.55">Cường Độ Trung bình (3-5 ngày / tuần)</option>
@@ -132,8 +153,11 @@ export const Tdee = () => {
 
         <br />
         <div>
-          <label htmlFor="bf">Tỉ Lệ Mỡ(%): </label>
+          <div style={{ marginLeft: "21px" }}>
+            <label htmlFor="bf">Tỉ Lệ Mỡ(%) </label>
+          </div>
           <input
+            className="tdee-cal-input-secord"
             type="number"
             id="bodyFatPercent"
             min="0"

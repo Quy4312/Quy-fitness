@@ -77,7 +77,6 @@ export const Calo = () => {
       fat: "10",
       calo: "143",
       id: uuidv4(),
-      id: uuidv4(),
     },
     {
       path: "cavien.PNG",
@@ -87,7 +86,6 @@ export const Calo = () => {
       fat: "14",
       calo: "221",
       id: uuidv4(),
-      id: uuidv4(),
     },
     {
       path: "nuocmam.PNG",
@@ -96,7 +94,6 @@ export const Calo = () => {
       carb: "4",
       fat: "0",
       calo: "35",
-      id: uuidv4(),
       id: uuidv4(),
     },
     {
@@ -445,7 +442,7 @@ export const Calo = () => {
             item.text.toLowerCase().indexOf(searchfood.trim().toLowerCase()) !==
             -1
           );
-        }).length && <p>Nothing found</p>}
+        }).length && <div>Không có kết quả</div>}
         <div className="food-list" ref={foodListRef}>
           {menu
             ?.filter((item) => {
