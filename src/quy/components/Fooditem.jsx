@@ -27,12 +27,15 @@ export const Fooditem = ({
   servings,
 }) => {
   const [inputfooditem, setInputfooditem] = useState(100);
-  const min = 1;
+  const min = 0;
   const max = 9999;
   const handleInputfooditem = (e) => {
     setInputfooditem(e.target.value);
     const value = Math.max(min, Math.min(max, Number(e.target.value)));
     setInputfooditem(value);
+    if (value === 0) {
+      setInputfooditem("");
+    }
   };
   const setcalo = (path, text, protein, carb, fat, calo) => {
     setCalocurrent((calocurrent += Number((inputfooditem / 100) * calo)));

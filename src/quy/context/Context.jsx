@@ -86,23 +86,33 @@ function TdeeProvider({ children }) {
       email: emailsignupvalue,
       password: passwordsignupvalue,
     };
-    var json = JSON.stringify(user);
-    console.log(json);
-    localStorage.setItem(emailsignupvalue, json);
-    setMessagedisplay("block");
-    setMessage("Sign Up Success");
-    setMessagecolor("rgb(76, 218, 76)");
-    setEmailsignupvalue("");
-    setPasswordsignupvalue("");
-    setMessagedisplay("block");
-    setMessage("Sign Up Success");
-    setMessagecolor("rgb(76, 218, 76)");
+    const data = localStorage.getItem(emailsignupvalue);
+    if (!data) {
+      var json = JSON.stringify(user);
+      console.log(json);
+      localStorage.setItem(emailsignupvalue, json);
+      setMessagedisplay("block");
+      setMessage("Sign Up Success");
+      setMessagecolor("rgb(76, 218, 76)");
+      setEmailsignupvalue("");
+      setPasswordsignupvalue("");
+      setMessagedisplay("block");
+      setMessage("Sign Up Success");
+      setMessagecolor("rgb(76, 218, 76)");
 
-    setTimeout(() => {
-      setMessagedisplay("none");
-      setSignupdisplay("none");
-      setSignindisplay("block");
-    }, 500);
+      setTimeout(() => {
+        setMessagedisplay("none");
+        setSignupdisplay("none");
+        setSignindisplay("block");
+      }, 1000);
+    } else if (data) {
+      setMessagedisplay("block");
+      setMessage("Account already exists");
+      setMessagecolor("red");
+      setTimeout(() => {
+        setMessagedisplay("none");
+      }, 1500);
+    }
   };
   const Signinbtn = () => {
     var user1 = localStorage.getItem(emailsigninvalue);
@@ -116,6 +126,9 @@ function TdeeProvider({ children }) {
       setMessagedisplay("block");
       setMessage("Invalid username/password combination");
       setMessagecolor("red");
+      setTimeout(() => {
+        setMessagedisplay("none");
+      }, 1500);
     } else if (
       emailsigninvalue === data.email &&
       passwordsigninvalue === data.password
