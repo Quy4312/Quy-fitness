@@ -357,6 +357,42 @@ export const Calo = () => {
       calo: "43",
       id: uuidv4(),
     },
+    {
+      path: "raumuong.PNG",
+      text: "Rau Muống",
+      protein: "3.2",
+      carb: "2.5",
+      fat: "0",
+      calo: "23",
+      id: uuidv4(),
+    },
+    {
+      path: "khoailang.PNG",
+      text: "Khoai Lang",
+      protein: "0.8",
+      carb: "28.5",
+      fat: "0.5",
+      calo: "119",
+      id: uuidv4(),
+    },
+    {
+      path: "com.jpg",
+      text: "Cơm Trắng",
+      protein: "2.7",
+      carb: "28.2",
+      fat: "0.3",
+      calo: "130",
+      id: uuidv4(),
+    },
+    {
+      path: "rauchanvit.jpg",
+      text: "Rau Chân Vịt",
+      protein: "2.9",
+      carb: "3.6",
+      fat: "3.3",
+      calo: "23",
+      id: uuidv4(),
+    },
   ]);
   const [searchfood, setSearchfood] = useState("");
   const [swap, setSwap] = useState(false);
